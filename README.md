@@ -56,8 +56,8 @@ Cette application de suivi du diabète a été développée pour assister les pa
 ### Étapes d'Installation
 1. **Cloner le dépôt**
    ```bash
-   git clone https://github.com/votre-utilisateur/votre-repo.git
-   cd votre-repo
+   git clone https://github.com/kettaabii/Diatrack-V2.git
+   cd Diatrack-V2
 
 
 ### Auteur 
