@@ -1,4 +1,4 @@
-package com.diabete.diabete.Entities;
+package com.diabete.diabete.Models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
