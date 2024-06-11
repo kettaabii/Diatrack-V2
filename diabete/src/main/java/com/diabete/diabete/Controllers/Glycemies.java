@@ -16,9 +16,9 @@ public class Glycemies {
     @RequestMapping("/")
     public String show(Model model){
         model.addAttribute("Glycemie",new Glycemie());
-        return "";
+        return "Glycemie";
     }
-    @RequestMapping("/Form")
+    @RequestMapping("/Add")
     public String Add(@ModelAttribute Glycemie glycemie){
        glycemieServiceImpl.AddGlycemie(glycemie);
         return "redirect:/";
