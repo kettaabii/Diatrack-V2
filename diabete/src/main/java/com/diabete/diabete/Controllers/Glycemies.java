@@ -16,6 +16,7 @@ public class Glycemies {
     @RequestMapping("/")
     public String show(Model model){
         model.addAttribute("Glycemie",new Glycemie());
+        model.addAttribute("Glycemies",glycemieServiceImpl.ShowGlycemie());
         return "Glycemie";
     }
     @RequestMapping("/Add")
