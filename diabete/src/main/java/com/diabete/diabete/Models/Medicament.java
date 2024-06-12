@@ -1,4 +1,5 @@
 package com.diabete.diabete.Models;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,27 +10,25 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Ingredient")
-public class Ingredient {
+@Entity(name = "Medicament")
+public class Medicament {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int IngredientId;
+    private Integer idMedicament;
 
     @Column
-    private String IngredientName;
+    private String libelle_Medicament;
 
     @Column
-    private String IngredientPicture;
+    private String Type_Medicament;
 
     @Column
-    private Double Carbs;
+    private Integer DoseJournaliere;
 
     @Column
-    private Double Gl;
+    private Integer DosesPrise;
 
     @Column
-    private Double Protein;
+    private String Picture ;
 
-    @Column
-    private Double Kcal;
 }
