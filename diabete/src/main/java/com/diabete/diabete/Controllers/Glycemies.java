@@ -17,12 +17,17 @@ public class Glycemies {
     public String show(Model model){
         model.addAttribute("Glycemie",new Glycemie());
         model.addAttribute("Glycemies",glycemieServiceImpl.ShowGlycemie());
-        return "Pdf";
+        return "Glycemie";
     }
     @RequestMapping("/Add")
     public String Add(@ModelAttribute Glycemie glycemie){
        glycemieServiceImpl.AddGlycemie(glycemie);
         return "redirect:/";
+    }
+    @RequestMapping("/Pdf")
+    public String pdfGenerate(Model model){
+        model.addAttribute("Glycemies",glycemieServiceImpl.ShowGlycemie());
+        return "Pdf";
     }
 
 
