@@ -17,7 +17,7 @@ public class Glycemies {
     public String show(Model model){
         model.addAttribute("Glycemie",new Glycemie());
         model.addAttribute("Glycemies",glycemieServiceImpl.ShowGlycemie());
-        return "Glycemie";
+        return "Pdf";
     }
     @RequestMapping("/Add")
     public String Add(@ModelAttribute Glycemie glycemie){
