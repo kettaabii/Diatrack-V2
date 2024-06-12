@@ -19,6 +19,7 @@ public class Recepies {
     public String Repas(Model model) {
         List<Repas> repas=repasService.getAllRepas();
         model.addAttribute("listeRepas",repas );
+        return "";
 
     }
 
