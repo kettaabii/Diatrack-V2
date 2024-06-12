@@ -6,16 +6,23 @@
     <title>Formulaire Glycémie</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<div class="chartsBx">
+    <h2>Graphique</h2>
+    <button id="change"><i class="bi bi-arrow-left-circle"></i></button>
+    <button id="back"><i class="bi bi-arrow-right-circle"></i></button>
+    <div class="chart"> <canvas id="chart-1"></canvas> </div>
+</div>
+
 <div class="container mt-5">
     <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Valeur Avant</th>
-            <th>Valeur Après</th>
+            <th>Valeur Glycemie</th>
             <th>Date</th>
             <th>Heure</th>
             <th>ID Diabétiques</th>
@@ -24,10 +31,9 @@
         <tbody>
         <tr th:each="glycemie : ${Glycemies}">
             <td th:text="${glycemie.idGlycemie}"></td>
-            <td th:text="${glycemie.valeurBefore}"></td>
-            <td th:text="${glycemie.valeurAfter}"></td>
-            <td th:text="${glycemie.date}"></td>
-            <td th:text="${glycemie.heurs}"></td>
+            <td class="glycemie-value" th:text="${glycemie.valeurGlycemie}"></td>
+            <td class="glycemie-date" th:text="${glycemie.Date}"></td>
+            <td th:text="${glycemie.Heure}"></td>
             <td th:text="${glycemie.diabetiques.idDiabetiques}"></td>
         </tr>
         </tbody>
@@ -38,27 +44,94 @@
     <h2 class="mb-4">Ajouter une mesure de glycémie</h2>
     <form method="post" action="Add" class="mb-5">
         <div class="form-group">
-            <label for="valeurBefore">Valeur Avant le Repas</label>
-            <input type="number" class="form-control" id="valeurBefore" name="valeurBefore" placeholder="Avant le repas" required>
+            <label for="valeurGlycemie">Valeur Glycemie</label>
+            <input type="number" class="form-control" id="valeurGlycemie" name="valeurGlycemie" placeholder="Entrez la valeur glycemie" required>
         </div>
         <div class="form-group">
-            <label for="valeurAfter">Valeur Après le Repas</label>
-            <input type="number" class="form-control" id="valeurAfter" name="valeurAfter" placeholder="Après le repas" required>
+            <label for="Date">Date</label>
+            <input type="date" class="form-control" id="Date" name="Date" required>
         </div>
         <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" name="date" required>
-        </div>
-        <div class="form-group">
-            <label for="heurs">Heure</label>
-            <input type="time" class="form-control" id="heurs" name="heurs" required>
+            <label for="Heure">Heure</label>
+            <input type="time" class="form-control" id="Heure" name="Heure" required>
         </div>
         <input type="hidden" class="form-control" id="diabetiques.idDiabetiques" name="diabetiques.idDiabetiques" value="1">
         <button type="submit" class="btn btn-primary" id="add">Ajouter</button>
     </form>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+
+        const dateElements = document.querySelectorAll('.glycemie-date');
+        const valueElements = document.querySelectorAll('.glycemie-value');
+
+        const labels = Array.from(dateElements).map(el => el.textContent.trim());
+        const valeurGlycemie = Array.from(valueElements).map(el => parseFloat(el.textContent.trim()));
+
+
+
+
+        let checked = false;
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Valeur Glycemie',
+                data: valeurGlycemie,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            }
+                ]
+            };
+                let getting = localStorage.getItem("type") || "bar";
+                const config = {
+                type: getting,
+                data: data,
+                options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                legend: {
+                position: 'top',
+            },
+                title: {
+                display: true,
+                text: 'Glycemie Levels Over Time'
+            }
+            }
+            },
+            };
+                document.getElementById("change").addEventListener("click", () => {
+                localStorage.clear();
+                localStorage.setItem("type", "bar");
+                checked = false;
+                setTimeout(()=>{
+                location.reload();
+            },600)
+
+
+            });
+
+                document.getElementById("back").addEventListener("click", () => {
+
+                localStorage.clear();
+                localStorage.setItem("type" , "line");
+                checked = true;
+                setTimeout(()=>{
+                location.reload();
+            },600)
+
+            });
+
+                const ctx = document.getElementById('chart-1').getContext('2d');
+                new Chart(ctx, config);
+                });
+</script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
