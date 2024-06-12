@@ -40,6 +40,9 @@ public class Repas {
     @Column
     private Double Kcal;
 
+    @Column
+    private Integer GroupeDiabete;
+
 
 
 }
