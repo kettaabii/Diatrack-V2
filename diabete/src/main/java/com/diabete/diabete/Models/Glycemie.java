@@ -28,6 +28,8 @@ public class Glycemie {
 
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime Heure;
+    @Column
+    private String Commentaire;
 
     @ManyToOne
     @JoinColumn(name = "idDiabetiques")
