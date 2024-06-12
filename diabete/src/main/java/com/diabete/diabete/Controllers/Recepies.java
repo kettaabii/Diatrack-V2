@@ -17,11 +17,12 @@ public class Recepies {
    private RepasService repasService;
     @GetMapping ("/Repas")
     public String Repas(Model model) {
+
         model.addAttribute("repas",new Repas());
         List<Repas> listrepas=repasService.getAllRepas();
         model.addAttribute("listeRepas",listrepas );
         return "Repashtml";
-    }
+
 
 
 
