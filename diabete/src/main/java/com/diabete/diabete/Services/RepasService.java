@@ -12,5 +12,5 @@ public interface RepasService {
 
     public List<Repas> getAllRepas();
 
-    public List<Repas> findRepasByGroupeDiabete1();
+    public List<Repas> findRepasByGroupeDiabete(Double valeurGlicemie);
 }

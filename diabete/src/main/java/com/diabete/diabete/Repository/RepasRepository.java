@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface RepasRepository extends JpaRepository<Repas, Integer> {
-    @Query(value="select * from repas where groupe_diabete=1",nativeQuery = true)
-    public List<Repas> findRepasByGroupeDiabete1();
+    @Query(value="SELECT * " +
+            "FROM repas r  " +
+            "WHERE r.max_gl > :valeurGlycemie",nativeQuery = true)
+    public List<Repas> findRepasByGroupeDiabete(Double valeurGlycemie);
 }
