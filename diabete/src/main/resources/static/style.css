@@ -10,3 +10,111 @@
 #change:hover , #back:hover {
     transform: scale(1.1);
 }
+/* ++======================  Avtivity   =======================++  */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, #0d0d0d, #7d7d7d);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    width: 60%;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+.text-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card h2 {
+    font-size: 1.5em;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card p {
+    font-size: 1em;
+    margin: 0 0 20px 0;
+}
+
+.card button {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.icon-container {
+    font-size: 2em;
+    margin-bottom: 10px;
+
+}
+
+.type1 .icon-container { color: #FF6347; }
+.type2 .icon-container { color: #FFD700; }
+.gestationnel .icon-container { color: #8A2BE2; }
+.mody .icon-container { color: #00CED1; }
+.neonatal .icon-container { color: #32CD32; }
+.secondaire .icon-container { color: #FF4500; }
+
+.card:hover i {
+    color: #ffffff;
+}
+
+.image {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+

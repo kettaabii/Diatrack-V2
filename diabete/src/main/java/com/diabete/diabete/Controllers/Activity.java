@@ -1,8 +1,6 @@
 package com.diabete.diabete.Controllers;
 
-import com.diabete.diabete.Models.Glycemie;
-import com.diabete.diabete.Services.ActivityServiceImp;
-import com.diabete.diabete.Services.GlycemieServiceImpl;
+import com.diabete.diabete.Services.ActivityService;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Activity {
 
     @Autowired
-    ActivityServiceImp activityServiceImp;
-    @RequestMapping("/")
+    ActivityService activityService;
+    @RequestMapping("/Activity")
     public String show(Model model){
         model.addAttribute("Activity",new Activity());
-        model.addAttribute("Activitys",activityServiceImp.ShowActivity());
-        return "Activity";
+        model.addAttribute("Activitys",activityService.ShowActivity());
+        return "ActivityHome";
     }
 }
