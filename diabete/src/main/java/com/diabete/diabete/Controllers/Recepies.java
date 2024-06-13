@@ -18,12 +18,10 @@ public class Recepies {
     @GetMapping ("/Repas")
     public String Repas(Model model) {
 
-        model.addAttribute("repas",new Repas());
-        List<Repas> listrepas=repasService.getAllRepas();
-        model.addAttribute("listeRepas",listrepas );
+        model.addAttribute("repas", new Repas());
+        List<Repas> listrepas = repasService.getAllRepas();
+        model.addAttribute("listeRepas", listrepas);
         return "Repashtml";
-
-
-
+    }
 
 }

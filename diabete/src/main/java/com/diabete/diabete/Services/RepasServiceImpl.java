@@ -17,8 +17,8 @@ public class RepasServiceImpl implements RepasService {
         return repasRepository.findAll();
     }
     @Override
-    public List<Repas> getRepasByGroupeDiabete(int groupeDiabete){
-        List<Repas> repasbygroupe =repasRepository.findAll();
-        return  repasbygroupe;
+    public List<Repas> findRepasByGroupeDiabete1(){
+        List<Repas> repasbygroupe1 =repasRepository.findRepasByGroupeDiabete1();
+        return  repasbygroupe1;
     }
 }
