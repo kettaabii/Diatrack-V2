@@ -13,6 +13,7 @@ import java.util.List;
 
 @Controller
 public class Recepies {
+
    @Autowired
    private RepasService repasService;
     @GetMapping ("/Repas")
@@ -22,6 +23,7 @@ public class Recepies {
         List<Repas> listrepas=repasService.getAllRepas();
         model.addAttribute("listeRepas",listrepas );
         return "Repashtml";
+
 
 
 
