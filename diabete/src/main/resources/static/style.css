@@ -1,0 +1,12 @@
+#change , #back{
+    background: transparent;
+    color: #ED0E64;
+    font-size: 20px;
+    border: none;
+    transition: .5s;
+    cursor: pointer;
+    margin: 5px;
+}
+#change:hover , #back:hover {
+    transform: scale(1.1);
+}

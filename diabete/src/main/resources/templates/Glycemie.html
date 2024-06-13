@@ -6,9 +6,12 @@
     <title>Formulaire Glycémie</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
 <div class="chartsBx">
     <h2>Graphique</h2>
     <button id="change"><i class="bi bi-arrow-left-circle"></i></button>
@@ -25,6 +28,7 @@
             <th>Valeur Glycemie</th>
             <th>Date</th>
             <th>Heure</th>
+            <th>Commentaire</th>
             <th>ID Diabétiques</th>
         </tr>
         </thead>
@@ -34,8 +38,10 @@
             <td class="glycemie-value" th:text="${glycemie.valeurGlycemie}"></td>
             <td class="glycemie-date" th:text="${glycemie.Date}"></td>
             <td th:text="${glycemie.Heure}"></td>
+            <td th:text="${glycemie.Commentaire}"></td>
             <td th:text="${glycemie.diabetiques.idDiabetiques}"></td>
         </tr>
+
         </tbody>
     </table>
 
@@ -55,6 +61,10 @@
             <label for="Heure">Heure</label>
             <input type="time" class="form-control" id="Heure" name="Heure" required>
         </div>
+        <div class="form-group">
+            <label for="Commentaire">Commentaire</label>
+            <input type="text" class="form-control" id="Commentaire" name="Commentaire" required>
+        </div>
         <input type="hidden" class="form-control" id="diabetiques.idDiabetiques" name="diabetiques.idDiabetiques" value="1">
         <button type="submit" class="btn btn-primary" id="add">Ajouter</button>
     </form>
@@ -62,74 +72,9 @@
 
 
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-
-        const dateElements = document.querySelectorAll('.glycemie-date');
-        const valueElements = document.querySelectorAll('.glycemie-value');
-
-        const labels = Array.from(dateElements).map(el => el.textContent.trim());
-        const valeurGlycemie = Array.from(valueElements).map(el => parseFloat(el.textContent.trim()));
-
-
-
-
-        let checked = false;
-        const data = {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Valeur Glycemie',
-                data: valeurGlycemie,
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            }
-                ]
-            };
-                let getting = localStorage.getItem("type") || "bar";
-                const config = {
-                type: getting,
-                data: data,
-                options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                legend: {
-                position: 'top',
-            },
-                title: {
-                display: true,
-                text: 'Glycemie Levels Over Time'
-            }
-            }
-            },
-            };
-                document.getElementById("change").addEventListener("click", () => {
-                localStorage.clear();
-                localStorage.setItem("type", "bar");
-                checked = false;
-                setTimeout(()=>{
-                location.reload();
-            },600)
-
-
-            });
-
-                document.getElementById("back").addEventListener("click", () => {
-
-                localStorage.clear();
-                localStorage.setItem("type" , "line");
-                checked = true;
-                setTimeout(()=>{
-                location.reload();
-            },600)
-
-            });
-
-                const ctx = document.getElementById('chart-1').getContext('2d');
-                new Chart(ctx, config);
-                });
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="/ScriptHome.js">
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

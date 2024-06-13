@@ -7,5 +7,7 @@ import java.util.List;
 
 
 public interface RepasService {
+
     public List<Repas> getAllRepas();
+    public List<Repas> getRepasByGroupeDiabete(int groupeDiabete);
 }
