@@ -15,11 +15,12 @@ import java.util.List;
 public class Recepies {
     @Autowired
     RepasService repasService;
+
     @GetMapping ("/Repas")
     public String Repas(Model model) {
         List<Repas> repas=repasService.getAllRepas();
         model.addAttribute("listeRepas",repas );
-
+        return "Glycemie";
     }
 
 

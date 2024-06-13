@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class RepasServiceImpl {
+public class RepasServiceImpl implements RepasService {
 
     @Autowired
     private RepasRepository repasRepository;
