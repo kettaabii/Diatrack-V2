@@ -11,7 +11,14 @@ public class RepasServiceImpl implements RepasService {
 
     @Autowired
     private RepasRepository repasRepository;
+
+    @Override
     public List<Repas> getAllRepas() {
         return repasRepository.findAll();
+    }
+    @Override
+    public List<Repas> getRepasByGroupeDiabete(int groupeDiabete){
+        List<Repas> repasbygroupe =repasRepository.findAll();
+        return  repasbygroupe;
     }
 }

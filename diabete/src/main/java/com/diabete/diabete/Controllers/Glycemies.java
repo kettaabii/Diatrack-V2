@@ -24,6 +24,11 @@ public class Glycemies {
        glycemieServiceImpl.AddGlycemie(glycemie);
         return "redirect:/";
     }
+    @RequestMapping("/Pdf")
+    public String pdfGenerate(Model model){
+        model.addAttribute("Glycemies",glycemieServiceImpl.ShowGlycemie());
+        return "Pdf";
+    }
 
 
 }

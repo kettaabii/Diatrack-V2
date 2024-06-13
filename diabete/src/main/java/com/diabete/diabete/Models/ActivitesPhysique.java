@@ -9,30 +9,45 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Glycemie {
+@NoArgsConstructor
+@Entity(name = "Activity")
+public class ActivitesPhysique {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idGlycemie;
+    private Integer ActivityId;
 
     @Column
-    private Integer valeurGlycemie;
+    private String Type;
 
     @Column
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate Date;
+    private Integer Duree;
 
+    @Column
+    private String Description;
+
+    @Column
+    private String Heropicture;
+
+    @Column
+    private String Picture1;
+
+    @Column
+    private String Picture2;
+
+    @Column
+    private Boolean Done;
+
+    @Column(name = "heurs")
     @DateTimeFormat(pattern = "HH:mm")
-    private LocalTime Heure;
-    @Column
-    private String Commentaire;
+    private LocalTime StartTime;
 
-    @ManyToOne
-    @JoinColumn(name = "idDiabetiques")
-    private Diabetiques diabetiques;
+    @Column
+    private String Video;
+
 
 }
