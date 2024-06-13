@@ -12,7 +12,7 @@ public class Activity {
 
     @Autowired
     ActivityServiceImp activityServiceImp;
-    @RequestMapping("/")
+    @RequestMapping("/Activity")
     public String show(Model model){
         model.addAttribute("Activity",new Activity());
         model.addAttribute("Activitys",activityServiceImp.ShowActivity());
