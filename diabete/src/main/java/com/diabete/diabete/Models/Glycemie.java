@@ -20,18 +20,16 @@ public class Glycemie {
     private Integer idGlycemie;
 
     @Column
-    private Integer valeurBefore;
-
-    @Column
-    private Integer valeurAfter;
+    private Integer valeurGlycemie;
 
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private LocalDate Date;
 
-    @Column(name = "heurs")
     @DateTimeFormat(pattern = "HH:mm")
-    private LocalTime heurs;
+    private LocalTime Heure;
+    @Column
+    private String Commentaire;
 
     @ManyToOne
     @JoinColumn(name = "idDiabetiques")

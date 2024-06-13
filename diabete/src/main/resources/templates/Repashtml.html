@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Glycémie</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Liste des repas</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Repas</th>
+            <th>Description</th>
+            <th>recette</th>
+            <th>Valeur </th>
+            <th>Carbs</th>
+            <th>Protein</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="repas : ${listeRepas}">
+            <td th:text="${listeRepas.RepasName}"></td>
+            <td th:text="${listeRepas.RepasDescription}"></td>
+            <td th:text="${listerepas.Recette}"></td>
+            <td th:text="${listerepas.ValeurGlicemie}"></td>
+            <td th:text="${listerepas.Carbs}"></td>
+            <td th:text="${listerepas.Protein}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
