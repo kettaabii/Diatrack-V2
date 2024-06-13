@@ -32,8 +32,11 @@ public class Recepies {
     }
     @RequestMapping("/tst")
     public String show(Model model){
-        model.addAttribute("Glycemi",new Glycemie());
-        model.addAttribute("Glycemiss",glycemieServiceImpl.ShowGlycemie());
+        model.addAttribute("repas", new Repas());
+        List<Repas> listrepas = repasService.getAllRepas();
+        model.addAttribute("listeRepas", listrepas);
+        model.addAttribute("Glycemie",new Glycemie());
+        model.addAttribute("Glycemies",glycemieServiceImpl.ShowGlycemie());
         return "testPage";
     }
     @RequestMapping("/Addtst")

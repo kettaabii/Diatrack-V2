@@ -69,10 +69,91 @@
         <button type="submit" class="btn btn-primary" id="add">Ajouter</button>
     </form>
 </div>
+<div class="container mt-5">
+    <h2 class="mb-4">Liste des repas recommendé pour vous </h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Repas</th>
+            <th>Description</th>
+            <th>recette</th>
+            <th>Valeur </th>
+            <th>Carbs</th>
+            <th>Protein</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="repas : ${listeRepas}">
+            <td th:text="${repas.repasName}"></td>
+            <td th:text="${repas.repasDescription}"></td>
+            <td th:text="${repas.recette}"></td>
+            <td th:text="${repas.glicydes}"></td>
+            <td th:text="${repas.carbs}"></td>
+            <td th:text="${repas.protein}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="recommandationsRepas">
+
+    </div>
+    <p id="bannerMessage"></p>
+
+</div>
+
+    <script >
+
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var listeRepas = /*[[${listeRepas}]]*/ [];
+        /*]]>*/
+        console.log(listeRepas);
 
 
 
+        let niveauGlicemiqueInput = document.getElementById('valeurGlycemie');
+        let recommandationsDiv = document.getElementById('recommandationsRepas');
 
+        niveauGlicemiqueInput.addEventListener('input', function() {
+            var niveauGlicemique = parseFloat(niveauGlicemiqueInput.value);
+
+            var banners = [
+                { range: [0, 1.1], message: "Niveau normal de glycémie" },
+                { range: [1.1, 1.27], message: "Niveau de glycémie légèrement élevé" },
+                { range: [1.27, 2], message: "Niveau de glycémie élevé" }
+            ];
+            var bannerMessage = "";
+
+            for (var i = 0; i < banners.length; i++) {
+                var banner = banners[i];
+                if (niveauGlicemique >= banner.range[0] && niveauGlicemique < banner.range[1]) {
+                    bannerMessage = banner.message;
+                    recommandationsDiv.innerHTML = "";
+                    break;
+                }
+            }
+
+
+            var repasRecommandes = listeRepas.filter(repas => {
+                return niveauGlicemique >= repas.maxGl;
+            });
+
+
+            var recommandationsHTML = "<h3>Repas recommandés :</h3><ul>";
+            repasRecommandes.forEach(function(repas) {
+                recommandationsHTML += "<li>" + repas.repasName + "</li>";
+            });
+            recommandationsHTML += "</ul>";
+
+
+            recommandationsDiv.innerHTML = recommandationsHTML;
+
+
+            document.getElementById('bannerMessage').textContent = bannerMessage;
+        });
+        /*]]>*/
+
+    </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="/ScriptHome.js">
