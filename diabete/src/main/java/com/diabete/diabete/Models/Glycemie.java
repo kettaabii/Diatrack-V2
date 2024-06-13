@@ -20,7 +20,7 @@ public class Glycemie {
     private Integer idGlycemie;
 
     @Column
-    private Integer valeurGlycemie;
+    private Double valeurGlycemie;
 
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")
