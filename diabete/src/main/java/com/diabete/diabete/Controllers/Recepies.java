@@ -1,8 +1,10 @@
 package com.diabete.diabete.Controllers;
 
 import com.diabete.diabete.Models.Glycemie;
+import com.diabete.diabete.Models.Ingredient;
 import com.diabete.diabete.Models.Repas;
 import com.diabete.diabete.Services.GlycemieServiceImpl;
+import com.diabete.diabete.Services.IngredientService;
 import com.diabete.diabete.Services.RepasService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import java.util.List;
 
 @Controller
 public class Recepies {
+    @Autowired
+    IngredientService ingredientService;
     @Autowired
     GlycemieServiceImpl glycemieServiceImpl;
    @Autowired
@@ -44,4 +48,13 @@ public String Add(@ModelAttribute Glycemie glycemie){
     glycemieServiceImpl.AddGlycemie(glycemie);
     return "redirect:/testPage";
 }
+    @GetMapping("/selection-ingredients")
+    public String afficherPageSelectionIngredients(Model model) {
+
+        List<Ingredient> listeIngredients = ingredientService.getIngredients();
+        model.addAttribute("listeIngredients", listeIngredients);
+        System.out.println(listeIngredients);
+
+        return "ingredientpage";
+    }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sélection d'ingrédients</title>
+</head>
+<body>
+<h1>Sélectionnez vos ingrédients</h1>
+
+<form id="ingredientForm">
+    <div th:each="ingredient : ${listeIngredients}">
+        <div class="card">
+            <div class="card-body">
+                <input type="checkbox" th:id="'ingredient_' + ${ingredient.ingredientId}" th:value="${ingredient.ingredientId}" class="ingredientCheckbox">
+                <label th:for="'ingredient_' + ${ingredient.ingredientId}" th:text="${ingredient.ingredientName}"></label>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" onclick="calculerTotal()">Calculer le total</button>
+</form>
+
+<div id="totalNutritionnel"></div>
+
+<script>
+    function calculerTotal() {
+        var totalCarbs = 0;
+        var totalGl = 0;
+        var totalKcal = 0;
+        var totalProtein = 0;
+
+        var checkboxes = document.getElementsByClassName("ingredientCheckbox");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var ingredientId = checkboxes[i].value;
+                var ingredient = document.getElementById('ingredient_' + ingredientId);
+
+                // Vérifier si l'élément est trouvé et que les attributs sont définis
+                if (ingredient && ingredient.hasAttribute("data-carbs") && ingredient.hasAttribute("data-gl") && ingredient.hasAttribute("data-kcal") && ingredient.hasAttribute("data-protein")) {
+                    totalCarbs += parseInt(ingredient.getAttribute("data-carbs"), 10) || 0; // Assurez-vous de spécifier la base 10 lors de l'utilisation de parseInt
+                    totalGl += parseInt(ingredient.getAttribute("data-gl"), 10) || 0;
+                    totalKcal += parseInt(ingredient.getAttribute("data-kcal"), 10) || 0;
+                    totalProtein += parseInt(ingredient.getAttribute("data-protein"), 10) || 0;
+                } else {
+                    console.error("Element with id=ingredient_" + ingredientId + " not found or missing data attributes.");
+                }
+            }
+        }
+
+        var totalDiv = document.getElementById("totalNutritionnel");
+        totalDiv.innerHTML = "<h2>Total nutritionnel :</h2>" +
+            "<p>Carbohydrates: " + totalCarbs + "g</p>" +
+            "<p>Glycemic Load: " + totalGl + "</p>" +
+            "<p>Calories: " + totalKcal + " kcal</p>" +
+            "<p>Protein: " + totalProtein + "g</p>";
+
+        // Vérifiez si le total dépasse un seuil et affichez une alerte si nécessaire
+        var seuilDanger = 10;
+        if (totalGl > seuilDanger) {
+            alert("Attention ! Le total du Glycemic Load est élevé. Cela peut être dangereux pour votre diabète.");
+        }
+    }
+
+
+
+</script>
+</body>
+</html>
