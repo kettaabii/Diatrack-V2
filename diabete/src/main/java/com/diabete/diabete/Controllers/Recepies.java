@@ -29,9 +29,11 @@ public class Recepies {
     public String Repas(Model model) {
 
         model.addAttribute("repas", new Repas());
+
         List<Repas> listrepas = repasService.findRepasByGroupeDiabete(1.1);
         model.addAttribute("listeRepas", listrepas);
         System.out.println(listrepas);
+
         return "Repashtml";
     }
     @RequestMapping("/tst")
@@ -55,6 +57,7 @@ public String Add(@ModelAttribute Glycemie glycemie){
         model.addAttribute("listeIngredients", listeIngredients);
         System.out.println(listeIngredients);
 
+
         return "ingredientpage";
     }
-}
+

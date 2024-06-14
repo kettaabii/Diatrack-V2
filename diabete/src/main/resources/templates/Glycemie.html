@@ -44,6 +44,9 @@
 
         </tbody>
     </table>
+</div>
+<div>
+    <button onclick="Advices(parseInt('${glycemie.valeurGlycemie}'))">take advice</button>
 
 </div>
 <div class="container mt-5">
@@ -70,6 +73,13 @@
     </form>
 </div>
 
+<script >
+    function Advices(valeurGlycemie) {
+        console.log("Value of valeurGlycemie:", valeurGlycemie);
+        window.location.href = "/advice/" + valeurGlycemie;
+    }
+
+</script>
 
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
