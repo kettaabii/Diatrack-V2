@@ -7,6 +7,8 @@ import com.diabete.diabete.Services.GlycemieServiceImpl;
 import com.diabete.diabete.Services.IngredientService;
 import com.diabete.diabete.Services.RepasService;
 
+import com.google.gson.Gson;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +55,14 @@ public String Add(@ModelAttribute Glycemie glycemie){
 
         List<Ingredient> listeIngredients = ingredientService.getIngredients();
         model.addAttribute("listeIngredients", listeIngredients);
+       var listeIngredientsJson =  listeIngredients.stream().map(ingredient ->  {
+            String jsonInString = new Gson().toJson(ingredient);
+            return new JSONObject(jsonInString);
+    }).toList();
+
+        model.addAttribute("listeIngredientsJson", listeIngredientsJson);
         System.out.println(listeIngredients);
+        System.out.println("//////"+listeIngredientsJson);
 
         return "ingredientpage";
     }
