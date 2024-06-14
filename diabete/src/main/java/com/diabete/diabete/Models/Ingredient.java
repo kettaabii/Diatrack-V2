@@ -32,4 +32,17 @@ public class Ingredient {
 
     @Column
     private Double Kcal;
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "IngredientId=" + IngredientId +
+                ", IngredientName='" + IngredientName + '\'' +
+                ", IngredientPicture='" + IngredientPicture + '\'' +
+                ", Carbs=" + Carbs +
+                ", Gl=" + Gl +
+                ", Protein=" + Protein +
+                ", Kcal=" + Kcal +
+                '}';
+    }
 }

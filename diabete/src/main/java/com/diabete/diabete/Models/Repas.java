@@ -14,35 +14,52 @@ import lombok.Setter;
 public class Repas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer RepasId;
+    private Integer repasId;
 
     @Column
-    private String RepasName;
+    private String repasName;
 
     @Column
-    private String RepasDescription;
+    private String repasDescription;
 
     @Column
-    private String Recette;
+    private String recette;
 
     @Column
-    private Double ValeurGlicemie;
+    private Double glicydes;
 
     @Column
-    private Double Carbs;
+    private Double carbs;
 
     @Column
-    private Double Gl;
+    private Double gl;
 
     @Column
-    private Double Protein;
+    private Double protein;
 
     @Column
-    private Double Kcal;
+    private Double kcal;
 
     @Column
-    private Integer GroupeDiabete;
+    private String tauxglicemie;
 
+    @Column
+    private Double maxGl;
 
-
+    @Override
+    public String toString() {
+        return "Repas{" +
+                "repasId=" + repasId +
+                ", repasName='" + repasName + '\'' +
+                ", repasDescription='" + repasDescription + '\'' +
+                ", recette='" + recette + '\'' +
+                ", glicydes=" + glicydes +
+                ", carbs=" + carbs +
+                ", gl=" + gl +
+                ", protein=" + protein +
+                ", kcal=" + kcal +
+                ", tauxglicemie='" + tauxglicemie + '\'' +
+                ", maxGl=" + maxGl +
+                '}';
+    }
 }

@@ -23,12 +23,12 @@
         </thead>
         <tbody>
         <tr th:each="repas : ${listeRepas}">
-            <td th:text="${listeRepas.RepasName}"></td>
-            <td th:text="${listeRepas.RepasDescription}"></td>
-            <td th:text="${listerepas.Recette}"></td>
-            <td th:text="${listerepas.ValeurGlicemie}"></td>
-            <td th:text="${listerepas.Carbs}"></td>
-            <td th:text="${listerepas.Protein}"></td>
+            <td th:text="${repas.repasName}"></td>
+            <td th:text="${repas.repasDescription}"></td>
+            <td th:text="${repas.recette}"></td>
+            <td th:text="${repas.glicydes}"></td>
+            <td th:text="${repas.carbs}"></td>
+            <td th:text="${repas.protein}"></td>
         </tr>
         </tbody>
     </table>
