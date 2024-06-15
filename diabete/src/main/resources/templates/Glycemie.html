@@ -17,7 +17,17 @@
     <button id="change"><i class="bi bi-arrow-left-circle"></i></button>
     <button id="back"><i class="bi bi-arrow-right-circle"></i></button>
     <div class="chart"> <canvas id="chart-1"></canvas> </div>
+    <form action="SearchM" method="post">
+        <input type="month" name="month">
+        <button type="submit">Search</button>
+    </form>
+    <form action="SearchM" method="post">
+        <input type="week">
+        <button type="submit">Search</button>
+    </form>
+
 </div>
+
 
 <div class="container mt-5">
     <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
@@ -44,6 +54,9 @@
 
         </tbody>
     </table>
+</div>
+<div>
+    <button onclick="Advices(parseInt('${glycemie.valeurGlycemie}'))">take advice</button>
 
 </div>
 <div class="container mt-5">
@@ -70,6 +83,13 @@
     </form>
 </div>
 
+<script >
+    function Advices(valeurGlycemie) {
+        console.log("Value of valeurGlycemie:", valeurGlycemie);
+        window.location.href = "/advice/" + valeurGlycemie;
+    }
+
+</script>
 
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

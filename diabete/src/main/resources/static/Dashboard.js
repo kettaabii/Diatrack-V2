@@ -68,3 +68,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.log(year)
     }
 });
+
+    document.querySelectorAll(".containerOfResult").forEach(e => {
+    const ArrayOfResult = ["Normale" , "Pas Normale"];
+    const diabetAll = parseFloat(e.querySelector(".diabetAll").textContent);
+    const status = e.querySelector(".status");
+
+    if (!isNaN(diabetAll)) {
+    if (diabetAll < 1.4) {
+    status.textContent = ArrayOfResult[0];
+} else {
+    status.textContent = ArrayOfResult[1];
+    status.style.background= "red";
+}}
+});
+
+    let list = document.querySelectorAll(".navigation li");
+
+    function activeLink() {
+    list.forEach((item) => {
+        item.classList.remove("hovered");
+    });
+    this.classList.add("hovered");
+}
+
+    list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+    // Menu Toggle
+    let toggle = document.querySelector(".toggle");
+    let navigation = document.querySelector(".navigation");
+    let main = document.querySelector(".main");
+
+    toggle.onclick = function () {
+    navigation.classList.toggle("active");
+    main.classList.toggle("active");
+};
+

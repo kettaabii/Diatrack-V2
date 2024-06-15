@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtered Conseils</title>
+    <link rel="stylesheet" href="../static/conseils.css">
+    <style>
+        body{
+            background-color: #eaeaea;
+        }
+        .wrapper{
+            width: 100%;
+            min-height: 200px;
+            flex-wrap: wrap;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .card{
+            width: 470px;
+            min-height: 200px;
+            margin: 20px 0;
+            background-color: #ffffff;
+            display: flex;
+            border: 2px solid black;
+            flex-direction: row;
+            border-top-right-radius:42px ;
+            border-bottom-left-radius: 42px;
+        }
+        .card-right{
+            width: 300px;
+            height: 230px;
+            background-color: #74a3ea;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 5px;
+            align-items: center;
+            border-top-right-radius:42px ;
+            border-bottom-left-radius: 42px;
+
+        }
+        h6 span{
+            border: 1px solid black;
+            padding: 5px 11px;
+            background-color: green;
+        }
+        h6{
+            border: 1px solid black;
+            padding: 5px 0px 5px 11px;
+        }
+        .card-left{
+            width: 170px;
+            height: 200px;
+
+display: flex  ;
+            justify-content: center;
+align-items: center;
+            border-top-right-radius:42px ;
+            border-bottom-left-radius: 42px;
+        }
+        .card-left img{
+            width: 150px;
+            height: 200px;
+            image-orientation: flip;
+            background-color: #ccc9c6;
+
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="card" th:each="conseil : ${conseils}">
+    <div class="card-left">
+        <img th:src="${conseil.picture}" alt="">
+    </div>
+    <div  class="card-right">
+    <h5 th:text="${conseil.title}">title</h5>
+    <article th:text="${conseil.article}">article</article>
+        <h6>your sugar level is     <span class="span" th:text="${conseil.status}">status</span>
+        </h6>
+    </div>
+    </div>
+</div>
+<script>
+
+        var btnShow = document.getElementById("btn")
+        btnShow.addEventListener("click" , function (){
+        document.getElementById("show-more").style.display = "inline"
+    })
+</script>
+
+
+</body>
+</html>

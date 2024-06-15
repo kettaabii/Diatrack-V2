@@ -18,13 +18,13 @@ public class ConseilsServiceImpl {
     public List<Conseils> getConseils() {
         return conseilsRepository.findAll();
     }
-    public Conseils getConseilsById(int id) {
-        Optional<Conseils> conseils = conseilsRepository.findById(id);
-        if (conseils.isPresent()) {
-            return conseils.get();
-        } else {
-            throw new RuntimeException("Did not find conseils id - " + id);
-        }
-    }
+//    public Conseils getConseilsById(int id) {
+//        Optional<Conseils> conseils = conseilsRepository.findById(id);
+//        if (conseils.isPresent()) {
+//            return conseils.get();
+//        } else {
+//            throw new RuntimeException("Did not find conseils id - " + id);
+//        }
+//    }
 
 }
