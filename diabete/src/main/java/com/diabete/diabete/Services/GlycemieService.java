@@ -8,4 +8,6 @@ public interface GlycemieService {
  void AddGlycemie(Glycemie glycemie);
  ArrayList<Glycemie> ShowGlycemie();
  ArrayList<Glycemie> SearchM();
+ void Delete(Integer id);
+
 }

@@ -27,4 +27,9 @@ public class GlycemieServiceImpl implements GlycemieService{
     public ArrayList<Glycemie> SearchM() {
         return null;
     }
+
+    @Override
+    public void Delete(Integer id) {
+        glycemieRepository.deleteById(id);
+    }
 }
