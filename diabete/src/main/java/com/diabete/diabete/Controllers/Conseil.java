@@ -21,7 +21,7 @@ public class Conseil {
 public String Listconseils(Model model){
     List<Conseils> TheConseils = conseils.getConseils();
     model.addAttribute("conseils", TheConseils);
-    return "conseils";
+    return "advices";
 
 
 }
@@ -40,7 +40,7 @@ public String Listconseils(Model model){
             System.out.println(filteredAdvice);
             return "advices";
         }
-        else if(valeurGlycemie >1 && valeurGlycemie <= 2 ) {
+        else if(valeurGlycemie >1 && valeurGlycemie <= 2) {
             List<Conseils> advices = conseils.getConseils();
             List<Conseils> filteredAdvice = advices
                     .stream()
@@ -49,9 +49,9 @@ public String Listconseils(Model model){
             model.addAttribute("conseils", filteredAdvice);
             System.out.println(filteredAdvice);
             return "advices";
-            // Assuming you have a view named "advices"
+
         }
-        else if(valeurGlycemie >2  ) {List<Conseils> advices = conseils.getConseils();
+        else if(valeurGlycemie >2) {List<Conseils> advices = conseils.getConseils();
             List<Conseils> filteredAdvice = advices
                     .stream()
                     .filter(conseil -> "height".equals(conseil.getStatus())) // Assuming "low" is the status you want to filter by
