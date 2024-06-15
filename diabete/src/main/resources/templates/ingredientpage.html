@@ -47,11 +47,12 @@
 
                 if (ingredient[i]) {
                    console.log(ingredient[i].carbs);
-                    totalCarbs += parseInt(ingredient[i].Carbs,10) ;
-                    console.log(totalCarbs)
-                    totalGl += parseInt(ingredient[i].Gl, 10) || 0;
-                    totalKcal += parseInt(ingredient[i].Kcal, 10) || 0;
-                    totalProtein += parseInt(ingredient[i].Protein, 10) || 0;
+                    totalCarbs += parseInt(ingredient[i].carbs,10) ;
+                    console.log(ingredient[i].gl);
+                    totalGl += parseInt(ingredient[i].gl, 10) || 0;
+                    console.log(ingredient[i].kcal);
+                    totalKcal += parseInt(ingredient[i].kcal, 10) || 0;
+                    totalProtein += parseInt(ingredient[i].protein, 10) || 0;
                 } else {
                     console.error("Element with id=ingredient_" + " not found or missing data attributes.");
                 }
