@@ -7,4 +7,5 @@ import java.util.ArrayList;
 public interface GlycemieService {
  void AddGlycemie(Glycemie glycemie);
  ArrayList<Glycemie> ShowGlycemie();
+ ArrayList<Glycemie> SearchM();
 }
