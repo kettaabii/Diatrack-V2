@@ -17,17 +17,7 @@
     <button id="change"><i class="bi bi-arrow-left-circle"></i></button>
     <button id="back"><i class="bi bi-arrow-right-circle"></i></button>
     <div class="chart"> <canvas id="chart-1"></canvas> </div>
-    <form action="SearchM" method="post">
-        <input type="month" name="month">
-        <button type="submit">Search</button>
-    </form>
-    <form action="SearchM" method="post">
-        <input type="week">
-        <button type="submit">Search</button>
-    </form>
-
 </div>
-
 
 <div class="container mt-5">
     <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
@@ -45,7 +35,7 @@
         <tbody>
         <tr th:each="glycemie : ${Glycemies}">
             <td th:text="${glycemie.idGlycemie}"></td>
-            <td class="glycemie-value" th:text="${glycemie.valeurGlycemie}"></td>
+            <td class="glycemie-value" th:text="${glycemie.valeurGlycemie}" ></td>
             <td class="glycemie-date" th:text="${glycemie.Date}"></td>
             <td th:text="${glycemie.Heure}"></td>
             <td th:text="${glycemie.Commentaire}"></td>
@@ -54,17 +44,14 @@
 
         </tbody>
     </table>
-</div>
-<div>
-    <button onclick="Advices(parseInt('${glycemie.valeurGlycemie}'))">take advice</button>
 
 </div>
 <div class="container mt-5">
     <h2 class="mb-4">Ajouter une mesure de glycémie</h2>
-    <form method="post" action="Add" class="mb-5">
+    <form method="post" action="Addtst" class="mb-5">
         <div class="form-group">
             <label for="valeurGlycemie">Valeur Glycemie</label>
-            <input type="number" class="form-control" id="valeurGlycemie" name="valeurGlycemie" placeholder="Entrez la valeur glycemie" required>
+            <input type="number" class="form-control" id="valeurGlycemie" name="valeurGlycemie" placeholder="Entrez la valeur glycemie"  step="0.1" required>
         </div>
         <div class="form-group">
             <label for="Date">Date</label>
@@ -82,16 +69,91 @@
         <button type="submit" class="btn btn-primary" id="add">Ajouter</button>
     </form>
 </div>
+<div class="container mt-5">
+    <h2 class="mb-4">Liste des repas recommendé pour vous </h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Repas</th>
+            <th>Description</th>
+            <th>recette</th>
+            <th>Valeur </th>
+            <th>Carbs</th>
+            <th>Protein</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="repas : ${listeRepas}">
+            <td th:text="${repas.repasName}"></td>
+            <td th:text="${repas.repasDescription}"></td>
+            <td th:text="${repas.recette}"></td>
+            <td th:text="${repas.glicydes}"></td>
+            <td th:text="${repas.carbs}"></td>
+            <td th:text="${repas.protein}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="recommandationsRepas">
 
-<script >
-    function Advices(valeurGlycemie) {
-        console.log("Value of valeurGlycemie:", valeurGlycemie);
-        window.location.href = "/advice/" + valeurGlycemie;
-    }
+    </div>
+    <p id="bannerMessage"></p>
 
-</script>
+</div>
+
+    <script >
+
+    </script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var listeRepas = /*[[${listeRepas}]]*/ [];
+        /*]]>*/
+        console.log(listeRepas);
 
 
+
+        let niveauGlicemiqueInput = document.getElementById('valeurGlycemie');
+        let recommandationsDiv = document.getElementById('recommandationsRepas');
+
+        niveauGlicemiqueInput.addEventListener('input', function() {
+            var niveauGlicemique = parseFloat(niveauGlicemiqueInput.value);
+
+            var banners = [
+                { range: [0, 1.1], message: "Niveau normal de glycémie" },
+                { range: [1.1, 1.27], message: "Niveau de glycémie légèrement élevé" },
+                { range: [1.27, 2], message: "Niveau de glycémie élevé" }
+            ];
+            var bannerMessage = "";
+
+            for (var i = 0; i < banners.length; i++) {
+                var banner = banners[i];
+                if (niveauGlicemique >= banner.range[0] && niveauGlicemique < banner.range[1]) {
+                    bannerMessage = banner.message;
+                    recommandationsDiv.innerHTML = "";
+                    break;
+                }
+            }
+
+
+            var repasRecommandes = listeRepas.filter(repas => {
+                return niveauGlicemique >= repas.maxGl;
+            });
+
+
+            var recommandationsHTML = "<h3>Repas recommandés :</h3><ul>";
+            repasRecommandes.forEach(function(repas) {
+                recommandationsHTML += "<li>" + repas.repasName + "</li>";
+            });
+            recommandationsHTML += "</ul>";
+
+
+            recommandationsDiv.innerHTML = recommandationsHTML;
+
+
+            document.getElementById('bannerMessage').textContent = bannerMessage;
+        });
+        /*]]>*/
+
+    </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="/ScriptHome.js">
