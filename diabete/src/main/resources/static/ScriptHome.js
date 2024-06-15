@@ -63,4 +63,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const ctx = document.getElementById('chart-1').getContext('2d');
     new Chart(ctx, config);
+    function filterChart(date){
+        const year=date.value.substring(0,4);
+        console.log(year)
+    }
 });

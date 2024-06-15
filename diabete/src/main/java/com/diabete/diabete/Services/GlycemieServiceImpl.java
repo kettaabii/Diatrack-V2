@@ -22,4 +22,9 @@ public class GlycemieServiceImpl implements GlycemieService{
     public ArrayList<Glycemie> ShowGlycemie() {
         return (ArrayList<Glycemie>) glycemieRepository.findAll();
     }
+
+    @Override
+    public ArrayList<Glycemie> SearchM() {
+        return null;
+    }
 }

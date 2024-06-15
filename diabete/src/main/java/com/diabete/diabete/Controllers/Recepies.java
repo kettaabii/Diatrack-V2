@@ -13,17 +13,17 @@ import java.util.List;
 
 @Controller
 public class Recepies {
-   @Autowired
-   private RepasService repasService;
-    @GetMapping ("/Repas")
+    @Autowired
+    private RepasService repasService;
+
+    @GetMapping("/Repas")
     public String Repas(Model model) {
 
-        model.addAttribute("repas",new Repas());
-        List<Repas> listrepas=repasService.getAllRepas();
-        model.addAttribute("listeRepas",listrepas );
+        model.addAttribute("repas", new Repas());
+        List<Repas> listrepas = repasService.getAllRepas();
+        model.addAttribute("listeRepas", listrepas);
         return "Repashtml";
 
 
-
-
+    }
 }
