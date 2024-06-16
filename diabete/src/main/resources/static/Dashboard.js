@@ -104,3 +104,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     main.classList.toggle("active");
 };
 
+const ajouter = document.getElementById("ajouter");
+const close = document.querySelector(".close");
+const formWrapperAdd = document.querySelector(".formWrapperAdd");
+let check = true;
+
+ajouter.addEventListener("click" , ()=>{
+        formWrapperAdd.style.display = "block"
+
+})
+close.addEventListener("click" , ()=>{
+    formWrapperAdd.style.display = "none"
+})
