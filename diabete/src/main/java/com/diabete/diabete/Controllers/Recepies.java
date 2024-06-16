@@ -10,11 +10,15 @@ import com.diabete.diabete.Services.RepasService;
 import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.List;
@@ -58,18 +62,17 @@ public class Recepies {
     }
 
     @GetMapping("/selection-ingredients")
-    public String afficherPageSelectionIngredients(Model model) {
+    public String afficherPageSelectionIngredients(@RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "10") int size, Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Ingredient> ingredientsPage = ingredientService.getIngredients(pageable);
+//        List<Ingredient> listeIngredients = ingredientService.getIngredients();
+//        model.addAttribute("listeIngredients", listeIngredients);
+        model.addAttribute("ingredientsPage", ingredientsPage);
 
-        List<Ingredient> listeIngredients = ingredientService.getIngredients();
-        model.addAttribute("listeIngredients", listeIngredients);
-       var listeIngredientsJson =  listeIngredients.stream().map(ingredient ->  {
-            String jsonInString = new Gson().toJson(ingredient);
-            return new JSONObject(jsonInString);
-    }).toList();
 
-        model.addAttribute("listeIngredientsJson", listeIngredientsJson);
-        System.out.println(listeIngredients);
-        System.out.println("//////"+listeIngredientsJson);
+
+
 
 
         return "ingredientpage";
