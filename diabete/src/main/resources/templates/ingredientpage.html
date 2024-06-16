@@ -2,32 +2,159 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Sélection d'ingrédients</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/ingredients.css">
 </head>
+
 <body>
-<h1>Sélectionnez vos ingrédients</h1>
+<!-- =============== Navigation ================ -->
+<div class="container">
+    <div class="navigation">
+        <ul>
+            <li>
+                <a href="#" id="logo">
+                        <span class="icon">
+                            <img src="https://i.ibb.co/4VHVgGN/o.png" width="100%">
+                        </span>
+                </a>
+            </li>
 
-<form id="ingredientForm">
-    <div th:each="ingredient : ${listeIngredients}  " >
+            <li>
+                <a href="${pageContext.request.contextPath}">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="Form">
+                        <span class="icon">
+                           <ion-icon name="add-circle-outline"></ion-icon>
+                        </span>
+                    <span class="title">Glycemies</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="ingredients">
+                        <span class="icon">
+                            <ion-icon name="fast-food-outline"></ion-icon>
+                        </span>
+                    <span class="title">Ingredients</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                    <span class="title">Help</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                    <span class="title">Settings</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                        </span>
+                    <span class="title">Password</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                    <span class="title">Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="topbar">
+        <div class="toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </div>
+
+        <div class="containerE">
+            <div class="search">
+                <label>
+                    <input type="text" placeholder="Search here">
+                    <ion-icon name="search-outline"></ion-icon>
+                </label>
+            </div>
+
+        </div>
+
+    </div>
+    <h1>Sélectionnez vos ingrédients</h1>
+
+    <form id="ingredientForm">
+        <div class="cards-ing">
+        <div th:each="ingredient : ${ingredientsPage.content}  " >
 
 
-        <div class="card">
-            <div class="card-body">
-
-                <input type="checkbox" th:value="${ingredient}" class="ingredientCheckbox">
-                <label th:for="'ingredient_' + ${ingredient.ingredientId}" th:text="${ingredient.ingredientName}"></label>
-
+            <div class="card" onclick="toggleIngredientSelection(this)">
+                <div class="card-body" >
+                    <div class="picture-ing" style="height: 8rem; width: 8rem;background-color: #74a3ea"></div>
+                    <input type="checkbox" th:value="${ingredient}" style="display: none;" class="ingredientCheckbox">
+                    <label th:for="'ingredient_' + ${ingredient.ingredientId}" th:text="${ingredient.ingredientName}"></label>
+                    <div class="card-footer" style="display: flex; justify-content: space-evenly;">
+                       <div class="value-nut" style="font-size: 0.9rem;" ><p>Proteins</p> <p style="background-color: yellow; border-radius: 4px;color: grey;" th:text="${ingredient.protein} "></p></div>
+                        <div class="value-nut" style="font-size: 0.9rem;"><p>Kcal</p> <p style="background-color: #da5d5d;border-radius: 4px;color: white;" th:text="${ingredient.kcal} "></p></div>
+                        <div class="value-nut"style="font-size: 0.9rem;" ><p>Gl</p> <p style="background-color: orange;border-radius: 4px;color: white;" th:text="${ingredient.gl} "></p></div>
+                        <div class="value-nut"style="font-size: 0.9rem;" ><p>Carbs</p> <p style="background-color: darkorchid;border-radius: 4px;color: white;" th:text="${ingredient.carbs} "></p></div>
+                    </div>
+                </div>
             </div>
         </div>
+            <ul class="pagination">
+                <li th:if="${ingredientsPage.hasPrevious()}">
+                    <a th:href="@{${#httpServletRequest.requestURI}}?page=${ingredientsPage.number - 1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:each="page : ${#numbers.sequence(0, ingredientsPage.totalPages - 1)}"
+                    th:class="${page == ingredientsPage.number ? 'active' : ''}">
+                    <a th:href="@{${#httpServletRequest.requestURI}}?page=${page}" th:text="${page + 1}"></a>
+                </li>
+                <li th:if="${ingredientsPage.hasNext()}">
+                    <a th:href="@{${#httpServletRequest.requestURI}}?page=${ingredientsPage.number + 1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
 
     <button type="button" onclick="calculerTotal()">Calculer le total</button>
 </form>
 
 <div id="totalNutritionnel"></div>
-
+</div>
 <script th:inline="javascript">
+    function toggleIngredientSelection(card) {
+        var checkbox = card.querySelector(".ingredientCheckbox"); // Trouve la checkbox dans la carte
+        checkbox.checked = !checkbox.checked; // Inverse l'état de la checkbox
+    }
 
 
     function calculerTotal() {
@@ -36,26 +163,26 @@
         var totalKcal = 0;
         var totalProtein = 0;
 
-        var checkboxes = document.getElementsByClassName("ingredientCheckbox");
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                var ingredient =/*[[${listeIngredients}]]*/[i];
-               // let ingredient =checkboxes[i].value;
+        var cards = document.getElementsByClassName("card"); // Sélectionne toutes les cartes
+
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            var checkbox = card.querySelector(".ingredientCheckbox"); // Trouve la checkbox dans la carte
+
+            if (checkbox.checked) {
+                // Récupère les données de l'ingrédient à partir de la valeur de la checkbox
+                var ingredient = /*[[${listeIngredients}]]*/[i];
                 console.log(ingredient[i])
-             //   var ingredient = document.getElementById('ingredient_' + ingredientId);
-
-
                 if (ingredient[i]) {
-                   console.log(ingredient[i].carbs);
+                    console.log(ingredient[i].carbs);
                     totalCarbs += parseInt(ingredient[i].carbs,10) ;
                     console.log(ingredient[i].gl);
                     totalGl += parseInt(ingredient[i].gl, 10) || 0;
                     console.log(ingredient[i].kcal);
                     totalKcal += parseInt(ingredient[i].kcal, 10) || 0;
                     totalProtein += parseInt(ingredient[i].protein, 10) || 0;
-                } else {
-                    console.error("Element with id=ingredient_" + " not found or missing data attributes.");
-                }
+            } } else {
+                console.error("Element with id=ingredient_" + " not found or missing data attributes.");
             }
         }
 
@@ -66,15 +193,17 @@
             "<p>Calories: " + totalKcal + " kcal</p>" +
             "<p>Protein: " + totalProtein + "g</p>";
 
-
         var seuilDanger = 10;
         if (totalGl > seuilDanger) {
             alert("Attention ! Le total du Glycemic Load est élevé. Cela peut être dangereux pour votre diabète.");
         }
     }
 
-
-
 </script>
+
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>
