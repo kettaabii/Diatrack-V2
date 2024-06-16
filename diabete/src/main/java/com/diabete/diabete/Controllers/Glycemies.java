@@ -40,7 +40,7 @@ public class Glycemies {
     @RequestMapping("/SearchM")
     public String searchByMonth(@RequestParam("month") Integer month, Model model) {
         ArrayList<Glycemie> records = glycemieService.searchByMonth(month);
-        model.addAttribute("SearchM", records);
+        model.addAttribute("Glycemies", records);
         return "Dashbord";
     }
 
