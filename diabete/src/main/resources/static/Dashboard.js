@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     document.querySelectorAll(".containerOfResult").forEach(e => {
     const ArrayOfResult = ["Normale" , "Pas Normale"];
-    const diabetAll = parseFloat(e.querySelector(".diabetAll").textContent);
+    const diabetAll = parseFloat(e.querySelector(".glycemie-value").textContent);
     const status = e.querySelector(".status");
 
     if (!isNaN(diabetAll)) {
