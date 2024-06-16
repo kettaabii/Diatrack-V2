@@ -40,7 +40,7 @@ public class Glycemies {
     public String Searchm(@RequestParam("month") String month){
         System.out.println("///////////////////////////////////////////::"+month);
 
-        return "Glycemie";
+        return "Dashbord";
     }
 
     @RequestMapping("/S")

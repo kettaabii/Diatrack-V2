@@ -521,20 +521,21 @@ body {
 }
 #add{
     padding: 10px 15px;
-    color: white;
-    background: #ff0000;
+    color: #00ADEF;
+    background: white;
     border-radius: 12px;
     font-weight: 800;
-    border: none;
     font-size: 16px;
     margin-left: 30px;
     cursor: pointer;
     transition: .4s;
+    margin-top: 5px;
+    border: 2px solid #00ADEF;
 }
 #add:hover{
     color: white;
-    background: #da5d5d;
-
+    background: #00ADEF;
+    border: 2px solid #00ADEF;
 }
 .right-part{
     width: 40%;
@@ -628,6 +629,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 .ajouterG > button {
     padding: 10px 15px;
@@ -650,4 +652,59 @@ body {
     color: #ED0E64;
     border: 1px solid #ED0E64;
 
+}
+.formWrapperAdd{
+    width: 50%;
+    height: 270px;
+    background: white;
+    position: absolute;
+    left: 5px;
+    top: 15px;
+    padding: 20px;
+    z-index: 9999;
+    border-radius: 10px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.31);
+    display: none;
+}
+.formWrapperAdd > form{
+    width: 100%;
+    height: 100%;
+}
+.form-group{
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
+    border: 1px solid #00ADEF;
+    border-radius: 7px;
+}
+.form-group > input , label{
+    padding: 10px 20px;
+}
+.form-group > label {
+    width: 42%;
+    border-right: 10px solid #00ADEF;
+}
+.form-group > input{
+    width: 55%;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+}
+.close{
+    position: absolute;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    top: -30px;
+    right: -40px;
+}
+#gMonth2{
+    width: 150px;
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
 }
