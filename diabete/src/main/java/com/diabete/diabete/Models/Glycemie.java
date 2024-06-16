@@ -35,4 +35,15 @@ public class Glycemie {
     @JoinColumn(name = "idDiabetiques")
     private Diabetiques diabetiques;
 
+    @Override
+    public String toString() {
+        return "Glycemie{" +
+                "idGlycemie=" + idGlycemie +
+                ", valeurGlycemie=" + valeurGlycemie +
+                ", Date=" + Date +
+                ", Heure=" + Heure +
+                ", Commentaire='" + Commentaire + '\'' +
+                ", diabetiques=" + diabetiques +
+                '}';
+    }
 }

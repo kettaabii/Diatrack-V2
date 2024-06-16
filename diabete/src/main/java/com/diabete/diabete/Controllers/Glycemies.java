@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -37,9 +38,9 @@ public class Glycemies {
     }
 
     @RequestMapping("/SearchM")
-    public String Searchm(@RequestParam("month") String month){
-        System.out.println("///////////////////////////////////////////::"+month);
-
+    public String searchByMonth(@RequestParam("month") Integer month, Model model) {
+        ArrayList<Glycemie> records = glycemieService.searchByMonth(month);
+        model.addAttribute("SearchM", records);
         return "Dashbord";
     }
 
