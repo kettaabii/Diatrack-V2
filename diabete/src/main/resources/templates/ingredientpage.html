@@ -90,10 +90,9 @@
     </div>
 </div>
 <div class="main">
+    <div class="tp-bar">
     <div class="topbar">
-        <div class="toggle">
-            <ion-icon name="menu-outline"></ion-icon>
-        </div>
+        <button type="button" onclick="calculerTotal()">Calculer le total</button>
 
         <div class="containerE">
             <div class="search">
@@ -106,11 +105,24 @@
         </div>
 
     </div>
+
+        <div class="modal-overlay" id="modalOverlay" onclick="toggleModal()">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close-btn" onclick="toggleModal()">&times;</span>
+                <div id="totalNutritionnel"></div>
+            </div>
+        </div>
+        <div id="top-alert" style="background-color: lightcoral; display:none; color: white; ">
+            <p>Attention ! Le total du Glycemic Load est élevé. Cela peut être dangereux pour votre diabète.</p>
+    </div>
+
+    </div>
     <h1>Sélectionnez vos ingrédients</h1>
 
     <form id="ingredientForm">
         <div class="cards-ing">
-        <div th:each="ingredient : ${ingredientsPage.content}  " >
+        <div th:each="ingredient : ${listeIngredients}  " >
 
 
             <div class="card" onclick="toggleIngredientSelection(this)">
@@ -119,38 +131,27 @@
                     <input type="checkbox" th:value="${ingredient}" style="display: none;" class="ingredientCheckbox">
                     <label th:for="'ingredient_' + ${ingredient.ingredientId}" th:text="${ingredient.ingredientName}"></label>
                     <div class="card-footer" style="display: flex; justify-content: space-evenly;">
-                       <div class="value-nut" style="font-size: 0.9rem;" ><p>Proteins</p> <p style="background-color: yellow; border-radius: 4px;color: grey;" th:text="${ingredient.protein} "></p></div>
-                        <div class="value-nut" style="font-size: 0.9rem;"><p>Kcal</p> <p style="background-color: #da5d5d;border-radius: 4px;color: white;" th:text="${ingredient.kcal} "></p></div>
-                        <div class="value-nut"style="font-size: 0.9rem;" ><p>Gl</p> <p style="background-color: orange;border-radius: 4px;color: white;" th:text="${ingredient.gl} "></p></div>
-                        <div class="value-nut"style="font-size: 0.9rem;" ><p>Carbs</p> <p style="background-color: darkorchid;border-radius: 4px;color: white;" th:text="${ingredient.carbs} "></p></div>
+                       <div class="value-nut" style="font-size: 0.7rem;" ><p>Proteins</p> <p style="background-color: yellow; border-radius: 4px;color: grey;" th:text="${ingredient.protein} "></p></div>
+                        <div class="value-nut"><p>Kcal</p> <p style="background-color: #da5d5d;border-radius: 4px;color: white;" th:text="${ingredient.kcal} "></p></div>
+                        <div class="value-nut" ><p>Gl</p> <p style="background-color: orange;border-radius: 4px;color: white;" th:text="${ingredient.gl} "></p></div>
+                        <div class="value-nut" ><p>Carbs</p> <p style="background-color: darkorchid;border-radius: 4px;color: white;" th:text="${ingredient.carbs} "></p></div>
                     </div>
                 </div>
             </div>
         </div>
-            <ul class="pagination">
-                <li th:if="${ingredientsPage.hasPrevious()}">
-                    <a th:href="@{${#httpServletRequest.requestURI}}?page=${ingredientsPage.number - 1}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li th:each="page : ${#numbers.sequence(0, ingredientsPage.totalPages - 1)}"
-                    th:class="${page == ingredientsPage.number ? 'active' : ''}">
-                    <a th:href="@{${#httpServletRequest.requestURI}}?page=${page}" th:text="${page + 1}"></a>
-                </li>
-                <li th:if="${ingredientsPage.hasNext()}">
-                    <a th:href="@{${#httpServletRequest.requestURI}}?page=${ingredientsPage.number + 1}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
         </div>
 
-    <button type="button" onclick="calculerTotal()">Calculer le total</button>
 </form>
 
-<div id="totalNutritionnel"></div>
+
 </div>
 <script th:inline="javascript">
+
+    function toggleModal() {
+        var modal = document.getElementById("modalOverlay");
+        modal.style.display = modal.style.display === "block" ? "none" : "block";
+    }
+
     function toggleIngredientSelection(card) {
         var checkbox = card.querySelector(".ingredientCheckbox"); // Trouve la checkbox dans la carte
         checkbox.checked = !checkbox.checked; // Inverse l'état de la checkbox
@@ -195,8 +196,9 @@
 
         var seuilDanger = 10;
         if (totalGl > seuilDanger) {
-            alert("Attention ! Le total du Glycemic Load est élevé. Cela peut être dangereux pour votre diabète.");
+            document.getElementById("top-alert").style.display="flex";
         }
+        toggleModal();
     }
 
 </script>
