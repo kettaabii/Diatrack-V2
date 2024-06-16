@@ -221,11 +221,12 @@ body {
 .chartsBx{
     position: relative;
     width: 95%;
-    height: 350px;
+    height: 400px;
     padding: 20px;
     border:1px solid #ED0E64;
     border-radius: 12px;
     margin: 10px auto;
+    padding-bottom: 60px;
 }
 
 .chartsBx .chart{
@@ -581,4 +582,72 @@ body {
     font-weight: 700;
     font-style: normal;
     padding: 0 3px;
+}
+
+.chart-controls{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px 30px;
+    justify-content: space-between;
+}
+.chart-controls > .search-chart{
+    display: flex;
+    width: 30%;
+    align-items: center;
+}
+.chart-controls > .search-chart > form{
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+    border: 2px solid #ED0E64;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.chart-controls > .search-chart > form > input{
+    outline: none;
+    padding: 12px 15px;
+    border-radius: 7px;
+    border: none;
+    color: #ED0E64;
+}
+.chart-controls > .search-chart > form > button{
+    border: none;
+    padding: 12px 15px;
+    background: transparent;
+}
+.btns{
+    width: 10%;
+    display: flex;
+    align-items: center;
+}
+.ajouterG{
+    width: 90%;
+    padding: 20px 20px 20px 6px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ajouterG > button {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #ED0E64;
+    color: #ED0E64;
+    cursor: pointer;
+}
+.ajouterG > form > input, button{
+    padding: 10px 12px;
+    background: transparent;
+    border-radius: 7px;
+    border: 1px solid #00ADEF;
+    color: #00ADEF;
+    outline-color: #1795ce;
+    cursor: pointer;
+    transition: .5s;
+}
+.ajouterG > form > button:hover{
+    color: #ED0E64;
+    border: 1px solid #ED0E64;
+
 }

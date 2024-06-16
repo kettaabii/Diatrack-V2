@@ -113,47 +113,56 @@
         <!-- ================ Add Charts JS ================= -->
         <div class="chartsBx">
             <h2>Graphique</h2>
-            <button id="change"><i class="bi bi-arrow-left-circle"></i></button>
-            <button id="back"><i class="bi bi-arrow-right-circle"></i></button>
+           <div class="chart-controls">
+               <div class="search-chart">
+                   <form action="SearchM" method="post">
+                       <input type="month" name="month">
+                       <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                   </form>
+                   <form action="SearchM" method="post">
+                       <input type="week">
+                       <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+                   </form>
+               </div>
+               <div class="btns">
+                   <button id="change"><i class="bi bi-arrow-left-circle"></i></button>
+                   <button id="back"><i class="bi bi-arrow-right-circle"></i></button>
+               </div>
+           </div>
             <div class="chart"> <canvas id="chart-1"></canvas> </div>
-            <form action="SearchM" method="post">
-                <input type="month" name="month">
-                <button type="submit">Search</button>
-            </form>
-            <form action="SearchM" method="post">
-                <input type="week">
-                <button type="submit">Search</button>
-            </form>
-
         </div>
 
         <!-- ================ Order Details List ================= -->
+        <div class="ajouterG">
+            <button>Ajouter</button>
+            <form action="" method="POST">
+                <input type="text" placeholder="Search By" required/>
+                <button><ion-icon name="search-outline"></ion-icon></button>
+            </form>
+        </div>
         <div class="details">
             <div class="recentOrders">
-
-
-                    <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
-                    <table class="table table-bordered">
+                    <table>
                         <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Valeur Glycemie</th>
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Commentaire</th>
+                            <th>Status</th>
                             <th>ID Diabétiques</th>
                             <th>Supprimer</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="glycemie : ${Glycemies}">
-                            <td th:text="${glycemie.idGlycemie}"></td>
+                        <tr th:each="glycemie : ${Glycemies}" class="containerOfResult">
                             <td class="glycemie-value" th:text="${glycemie.valeurGlycemie}"></td>
                             <td class="glycemie-date" th:text="${glycemie.Date}"></td>
                             <td th:text="${glycemie.Heure}"></td>
                             <td th:text="${glycemie.Commentaire}"></td>
+                            <td><span class="status delivered ">Delivered</span></td>
                             <td th:text="${glycemie.diabetiques.idDiabetiques}"></td>
-                            <td><a th:href="@{'/Delete/' + ${glycemie.idGlycemie}}">Delete</a></td>
+                            <td><a th:href="@{'/Delete/' + ${glycemie.idGlycemie}}"><i class="bi bi-trash-fill"></i></a></td>
                         </tr>
 
                         </tbody>
@@ -164,13 +173,11 @@
     </div>
 
 
-
-
-
-    <!-- ====== ionicons ======= -->
+   <script src="/Dashboard.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 
 </html>
+
