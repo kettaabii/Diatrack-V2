@@ -24,8 +24,8 @@ public class GlycemieServiceImpl implements GlycemieService{
     }
 
     @Override
-    public ArrayList<Glycemie> SearchM() {
-        return null;
+    public ArrayList<Glycemie> searchByMonth(Integer month) {
+        return glycemieRepository.findByMonth(month);
     }
 
     @Override

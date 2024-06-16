@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 public interface GlycemieRepository extends JpaRepository<Glycemie,Integer> {
 
-//    @Query(value = "SELECT g.Date , q.valeurGlycemie FROM glycemie g WHERE MONTH(g.date)=", nativeQuery = true)
-//    ArrayList<Glycemie> ;
+    @Query(value = "SELECT * FROM glycemie g WHERE MONTH(g.date) = :month", nativeQuery = true)
+    ArrayList<Glycemie> findByMonth(Integer month);
 }
-
 
